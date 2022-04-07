@@ -2,12 +2,12 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from . forms import UserRegisterForm
 from django.utils.text import slugify
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, redirect, get_object_or_404
+
 
 from .models import Lender
 from product.models import Product
 from .forms import ProductForm
-
 
 def become_lender(request):
     if request.method == 'POST':
@@ -65,3 +65,50 @@ def add_product(request):
         form = ProductForm()
     
     return render(request, 'lender/add_product.html', {'form': form})
+
+@login_required
+def edit_product(request, pk):
+    lender = request.user.lender
+    product = lender.products.get(pk=pk)
+
+    if request . method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+    
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('lender_admin')
+    else:
+        form = ProductForm(instance=product)
+       
+        return render(request, 'lender/edit_product.html', {'form': form,  'product': product})
+
+@login_required
+def edit_lender(request):
+    lender = request.user.lender
+
+    if request.method == 'POST':
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+
+        if name:
+            lender.created_by.email = email
+            lender.created_by.save()
+
+            lender.name = name
+            lender.save()
+
+            return redirect('lender_admin')
+    
+    return render(request, 'lender/edit_lender.html', {'vendor': lender})
+
+def lenders(request):
+    lenders = Lender.objects.all()
+
+    return render(request, 'lender/lenders.html', {'lenders': lenders})
+
+def lender(request, lender_id):
+    lender = get_object_or_404(Lender, pk=lender_id)
+
+    return render(request, 'lender/lender.html', {'lender': lender})

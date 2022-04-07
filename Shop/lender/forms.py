@@ -22,3 +22,11 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'address', 'postcode', 'password1',
                   'password2']
+
+
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ['category', 'image', 'title', 'description', 'price']
+
