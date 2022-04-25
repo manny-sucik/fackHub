@@ -73,8 +73,19 @@
                 }
                 
                 .dropdown-content a:hover {background-color: #f1f1f1;}
-                .dropdown:hover .dropdown-content {display: block;}
+                .dropdown:hover .dropdown-content {display: block}
                 .dropdown:hover .dropbtn {background-color:black}
+
+
+
+                </style>
+                
+
+                <!-- stying for the footer -->
+                <style>
+                    footer p {
+                        text-align: center;    
+                    }
                 </style>
         <head>
         <meta charset="utf-8">
@@ -122,8 +133,7 @@
                         <div class="dropdown-content">
                             {% for category in menu_categories %}
                             <a href="{% url 'category' category.slug %}" class="navbar-item">{{ category.title }}</a>
-                        {% endfor %}
-        
+                            {% endfor %}
                         </div>
                       </div>
 
@@ -135,6 +145,26 @@
                     <div class="navbar-item">
                         <a href="{% url 'cart' %}" class="button is-dark">Cart{% if cart %} ({{ cart|length }}){% endif %}</a>
                     </div>
+
+                    <!-- showing long/logout or register according to if user logged in or not -->
+                    <div class="navbar-item">
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'lender_admin' %}">profile</a>
+
+                            <div class="navbar-item">
+                                <a href="{% url 'logout' %}">sign out</a>
+                            </div>
+
+                        {% else %}
+                            <a href="{% url 'login' %}">login</a>
+                            <div class="navbar-item">
+                                <a href="{% url 'become_lender' %}">register</a>
+                            </div>
+                        {% endif %}
+                        <br>
+                    </div>
+
+
                     
                 </div>
             </div>
@@ -148,16 +178,8 @@
         </section>
         
         <footer class="footer">
-            <h3 class="is-size-4 mb-4">FrackHub</h3>
-
-            {% if request.user.is_authenticated %}
-                <a href="{% url 'lender_admin' %}">Lender admin</a>
-            {% else %}
-                <a href="{% url 'become_lender' %}">Become a lender</a>
-            {% endif %}
-            <br>
-            <a href="{% url 'lenders' %}">Lenders</a>
-        
+            <p>FrackHub is a university project in which the group had to produce a fully functional and professitional site. &copy; by all contrabuters. All rights are reserved.</p>
+            <p> click <a href="{% url 'lenders' %}">members</a> to see all members.</p>
         </footer>
         
         {% block scripts %}
