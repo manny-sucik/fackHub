@@ -1,0 +1,4 @@
+msodbcsql
+Docker Desktop Installer
+mingw-get-setup
+vs_buildtools
