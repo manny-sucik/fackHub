@@ -150,5 +150,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ASGI_APPLICATION = 'shop.asgi.application'
 
 AUTHENTICATION_BACKENDS = [
-	'shop.bacends.CustomModelsBackend'
+	'shop.backends.CustomModelBackend'
 ]
