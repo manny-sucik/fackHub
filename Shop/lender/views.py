@@ -18,7 +18,7 @@ def become_lender(request):
 
             # commented out line below to prevent login on registarion
             # login(request, user)
-            user.is_valid = False
+            user.is_active = False
             user.save()
 
             #login(request, user)
