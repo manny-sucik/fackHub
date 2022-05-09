@@ -149,8 +149,8 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ASGI_APPLICATION = 'shop.asgi.application'
 
+
 #added for is_active false login to display correct error message
 AUTHENTICATION_BACKENDS = [
     'shop.backends.CustomModelBackend',
 ]
-#

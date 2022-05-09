@@ -32,4 +32,3 @@ admin.site.register(Lender, LenderAdmin)
 #added
 admin.site.unregister(User)
 admin.site.register(User, UserAdminCustom)
-#
