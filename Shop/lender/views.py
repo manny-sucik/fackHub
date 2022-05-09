@@ -23,7 +23,7 @@ def become_lender(request):
 
             #login(request, user)
 
-            lender = Lender.objects.create(name=user.username, created_by=user)
+            #lender = Lender.objects.create(name=user.username, created_by=user)
 
             return redirect('frontpage')
     else:
