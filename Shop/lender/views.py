@@ -15,6 +15,9 @@ def become_lender(request):
 
         if form.is_valid():
             user = form.save()
+
+            # commented out line below to prevent login on registarion
+            # login(request, user)
             user.is_valid = False
             user.save()
 
