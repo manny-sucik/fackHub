@@ -15,8 +15,10 @@ def become_lender(request):
 
         if form.is_valid():
             user = form.save()
+            user.is_valid = False
+            user.save()
 
-            login(request, user)
+            #login(request, user)
 
             lender = Lender.objects.create(name=user.username, created_by=user)
 
